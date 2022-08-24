@@ -3,11 +3,11 @@ require 'active_support/inflector'
 
 class Song
 
-
+#table name
   def self.table_name
     self.to_s.downcase.pluralize
   end
-
+#column_names
   def self.column_names
     DB[:conn].results_as_hash = true
 
@@ -20,11 +20,11 @@ class Song
     end
     column_names.compact
   end
-
+#attr_accessor: map the column names to create symbols
   self.column_names.each do |col_name|
     attr_accessor col_name.to_sym
   end
-
+#initialize 
   def initialize(options={})
     options.each do |property, value|
       self.send("#{property}=", value)
